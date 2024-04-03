@@ -1,12 +1,13 @@
 package br.unitins.topicos2.ano2024.model.produto;
 
-import java.util.ArrayList;
 import java.util.List;
+import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.PrimaryKeyJoinColumn;
 
+@Entity
 @PrimaryKeyJoinColumn(name = "id")
 public class NicSalt extends Produto {
     
@@ -15,17 +16,17 @@ public class NicSalt extends Produto {
     private Double valor;
     private String descricao;
 
-    @OneToMany
+    @ManyToMany
     @JoinTable(name = "sabor_nicSalt", 
                 joinColumns = @JoinColumn(name = "id_nicSalt"), 
                 inverseJoinColumns = @JoinColumn(name = "id_sabor"))
-    private List<Sabor> sabores;
+    private List<Sabor> listaSabor;
 
-    @OneToMany
+    @ManyToMany
     @JoinTable(name = "marca_nicSalt", 
                 joinColumns = @JoinColumn(name = "id_nicSalt"), 
                 inverseJoinColumns = @JoinColumn(name = "id_marca"))
-    private List<Marca> marcas;
+    private List<Marca> listaMarca;
 
     public String getNomeImagem() {
         return nomeImagem;
@@ -59,40 +60,21 @@ public class NicSalt extends Produto {
         this.descricao = descricao;
     }
 
-    public List<Sabor> getSabores() {
-        return sabores;
+    public List<Sabor> getListaSabor() {
+        return listaSabor;
     }
 
-    public void setSabores(List<Sabor> sabores) {
-        this.sabores = sabores;
+    public void setListaSabor(List<Sabor> listaSabor) {
+        this.listaSabor = listaSabor;
     }
 
-    public void plusSabores(Sabor sabor) {
-        
-        if (sabores == null) {
-
-            sabores = new ArrayList<>();
-        }
-        
-        this.sabores.add(sabor);
+    public List<Marca> getListaMarca() {
+        return listaMarca;
     }
 
-    public List<Marca> getMarcas() {
-        return marcas;
+    public void setListaMarca(List<Marca> listaMarca) {
+        this.listaMarca = listaMarca;
     }
 
-    public void setMarcas(List<Marca> marcas) {
-        this.marcas = marcas;
-    }
-
-    public void plusMarcas(Marca marca) {
-        
-        if (marcas == null) {
-
-            marcas = new ArrayList<>();
-        }
-        
-        this.marcas.add(marca);
-    }
 
 }

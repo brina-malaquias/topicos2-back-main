@@ -1,13 +1,13 @@
 package br.unitins.topicos2.ano2024.model.produto;
 
-import jakarta.persistence.JoinTable;
-
-import java.util.ArrayList;
 import java.util.List;
+import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.JoinTable;
 import jakarta.persistence.PrimaryKeyJoinColumn;
+import jakarta.persistence.ManyToMany;
 
+@Entity
 @PrimaryKeyJoinColumn(name = "id")
 public class PodDescartavel extends Produto{
         
@@ -16,23 +16,23 @@ public class PodDescartavel extends Produto{
     private Double valor;
     private String descricao;
 
-    @OneToMany
+    @ManyToMany
     @JoinTable(name = "puff_podDescartavel", 
                 joinColumns = @JoinColumn(name = "id_podDescartavel"), 
                 inverseJoinColumns = @JoinColumn(name = "id_puff"))
-    private List<Puff> puffs;
+    private List<Puff> listaPuff;
 
-    @OneToMany
+    @ManyToMany
     @JoinTable(name = "sabor_podDescartavel", 
                 joinColumns = @JoinColumn(name = "id_podDescartavel"), 
                 inverseJoinColumns = @JoinColumn(name = "id_sabor"))
-    private List<Sabor> sabores;
+    private List<Sabor> listaSabor;
 
-    @OneToMany
+    @ManyToMany
     @JoinTable(name = "marca_podDescartavel", 
                 joinColumns = @JoinColumn(name = "id_podDescartavel"), 
                 inverseJoinColumns = @JoinColumn(name = "id_marca"))
-    private List<Marca> marcas;
+    private List<Marca> listaMarca;
 
     public String getNomeImagem() {
         return nomeImagem;
@@ -66,57 +66,29 @@ public class PodDescartavel extends Produto{
         this.descricao = descricao;
     }
 
-    public List<Puff> getPuffs() {
-        return puffs;
+    public List<Puff> getListaPuff() {
+        return listaPuff;
     }
 
-    public void setPuffs(List<Puff> puffs) {
-        this.puffs = puffs;
+    public void setListaPuff(List<Puff> listaPuff) {
+        this.listaPuff = listaPuff;
     }
 
-    public void plusPuffs(Puff puff) {
-        
-        if (puffs == null) {
-
-            puffs = new ArrayList<>();
-        }
-        
-        this.puffs.add(puff);
+    public List<Sabor> getListaSabor() {
+        return listaSabor;
     }
 
-    public List<Sabor> getSabores() {
-        return sabores;
+    public void setListaSabor(List<Sabor> listaSabor) {
+        this.listaSabor = listaSabor;
     }
 
-    public void setSabores(List<Sabor> sabores) {
-        this.sabores = sabores;
+    public List<Marca> getListaMarca() {
+        return listaMarca;
     }
 
-    public void plusSabores(Sabor sabor) {
-        
-        if (sabores == null) {
-
-            sabores = new ArrayList<>();
-        }
-        
-        this.sabores.add(sabor);
+    public void setListaMarca(List<Marca> listaMarca) {
+        this.listaMarca = listaMarca;
     }
 
-    public List<Marca> getMarcas() {
-        return marcas;
-    }
-
-    public void setMarcas(List<Marca> marcas) {
-        this.marcas = marcas;
-    }
-
-    public void plusMarcas(Marca marca) {
-        
-        if (marcas == null) {
-
-            marcas = new ArrayList<>();
-        }
-        
-        this.marcas.add(marca);
-    }
+    
 }
