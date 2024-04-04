@@ -9,7 +9,7 @@ import jakarta.validation.Valid;
 public interface PodRecarregavelService {
 
         // recursos basicos
-        //List<PodRecarregavelResponseDTO> getAll(int page, int pageSize);
+        List<PodRecarregavelResponseDTO> getAll(int page, int pageSize);
 
         PodRecarregavelResponseDTO findById(Long id);
     

@@ -4,10 +4,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import br.unitins.topicos2.ano2024.dto.produto.MarcaResponseDTO;
 import br.unitins.topicos2.ano2024.dto.produto.PodRecarregavelDTO;
 import br.unitins.topicos2.ano2024.dto.produto.PodRecarregavelResponseDTO;
-import br.unitins.topicos2.ano2024.model.produto.Marca;
 import br.unitins.topicos2.ano2024.model.produto.PodRecarregavel;
 import br.unitins.topicos2.ano2024.repository.produto.PodRecarregavelRepository;
 import jakarta.enterprise.context.ApplicationScoped;
@@ -20,23 +18,24 @@ import jakarta.validation.Validator;
 import jakarta.ws.rs.NotFoundException;
 
 @ApplicationScoped
-public class PodRecarregavellServiceImpl implements PodRecarregavelService{
+public class PodRecarregavelServiceImpl implements PodRecarregavelService{
+    
     @Inject
     PodRecarregavelRepository podRecarregavelRepository;
 
     @Inject
     Validator validator;
-    /* 
+    
     @Override
     public List<PodRecarregavelResponseDTO> getAll(int page, int pageSize) {
-        List<PodRecarregavel> list = PodRecarregavelRepository
+        List<PodRecarregavel> list = podRecarregavelRepository
                                 .findAll()
                                 .page(page, pageSize)
                                 .list();
         
         return list.stream().map(e -> PodRecarregavelResponseDTO.valueOf(e)).collect(Collectors.toList());
     }    
-    */
+    
     @Override
     public PodRecarregavelResponseDTO findById(Long id) {
         PodRecarregavel podRecarregavel = podRecarregavelRepository.findById(id);

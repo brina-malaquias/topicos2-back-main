@@ -52,15 +52,13 @@ public class PodRecarregavelResource {
         return Response.status(Status.NO_CONTENT).build();
     }
 
-    /* 
     @GET
     public Response findAll(
                 @QueryParam("page") @DefaultValue("0") int page,
                 @QueryParam("pageSize") @DefaultValue("100") int pageSize) {
 
         return Response.ok(service.getAll(page, pageSize)).build();
-    }
-    */
+    }    
 
     @GET
     @Path("/{id}")
