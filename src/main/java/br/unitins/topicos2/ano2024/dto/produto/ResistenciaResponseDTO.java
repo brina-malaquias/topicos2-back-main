@@ -12,4 +12,5 @@ public record ResistenciaResponseDTO(
             resistencia.getOhms()
         );
     }
+
 }
