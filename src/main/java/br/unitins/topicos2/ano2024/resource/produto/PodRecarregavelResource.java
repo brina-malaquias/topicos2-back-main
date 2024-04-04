@@ -1,10 +1,9 @@
 package br.unitins.topicos2.ano2024.resource.produto;
 
+import br.unitins.topicos2.ano2024.dto.produto.PodRecarregavelDTO;
+import br.unitins.topicos2.ano2024.dto.produto.PodRecarregavelResponseDTO;
+import br.unitins.topicos2.ano2024.service.produto.PodRecarregavelService;
 import org.jboss.logging.Logger;
-
-import br.unitins.topicos2.ano2024.dto.produto.PuffDTO;
-import br.unitins.topicos2.ano2024.dto.produto.PuffResponseDTO;
-import br.unitins.topicos2.ano2024.service.produto.PuffService;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.Consumes;
@@ -19,21 +18,20 @@ import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.QueryParam;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
-import jakarta.ws.rs.core.Response.Status;
+import jakarta.ws.rs.core.Response.Status; 
 
-@Path("/puffs")
+@Path("/podsRecarregaveis")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-public class PuffResource {
-    
+public class PodRecarregavelResource {
     @Inject
-    PuffService service;
+    PodRecarregavelService service;
 
-    private static final Logger LOG = Logger.getLogger(PuffResource.class);
+    private static final Logger LOG = Logger.getLogger(PodRecarregavelResource.class);
 
     @POST
-    public Response create(PuffDTO dto) {
-        PuffResponseDTO retorno = service.create(dto);
+    public Response create(PodRecarregavelDTO dto) {
+        PodRecarregavelResponseDTO retorno = service.create(dto);
         //return Response.status(Status.CREATED).entity(retorno).build();
         return Response.status(201).entity(retorno).build();
     }
@@ -41,7 +39,7 @@ public class PuffResource {
     @PUT
     @Transactional
     @Path("/{id}")
-    public Response update(PuffDTO dto, @PathParam("id") Long id) {
+    public Response update(PodRecarregavelDTO dto, @PathParam("id") Long id) {
         service.update(id, dto);
         return Response.status(Status.NO_CONTENT).build();
     }
@@ -54,6 +52,7 @@ public class PuffResource {
         return Response.status(Status.NO_CONTENT).build();
     }
 
+    /* 
     @GET
     public Response findAll(
                 @QueryParam("page") @DefaultValue("0") int page,
@@ -61,6 +60,7 @@ public class PuffResource {
 
         return Response.ok(service.getAll(page, pageSize)).build();
     }
+    */
 
     @GET
     @Path("/{id}")
@@ -68,13 +68,11 @@ public class PuffResource {
         return Response.ok(service.findById(id)).build();
     }
     
-    
     @GET
-    @Path("/search/nome/{quantidade}")
-    public Response findByNome(@PathParam("quantidade") String quantidade) {
-        return Response.ok(service.findByNome(quantidade)).build();
+    @Path("/search/nome/{nome}")
+    public Response findByNome(@PathParam("nome") String nome) {
+        return Response.ok(service.findByNome(nome)).build();
     }
-    
     
     @GET
     @Path("/count")

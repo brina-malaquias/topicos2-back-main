@@ -1,10 +1,10 @@
 package br.unitins.topicos2.ano2024.resource.produto;
 
-import org.jboss.logging.Logger;
 
 import br.unitins.topicos2.ano2024.dto.produto.MarcaDTO;
 import br.unitins.topicos2.ano2024.dto.produto.MarcaResponseDTO;
 import br.unitins.topicos2.ano2024.service.produto.MarcaService;
+import org.jboss.logging.Logger;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.Consumes;
