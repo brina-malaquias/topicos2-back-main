@@ -73,8 +73,8 @@ public class PodRecarregavelServiceImpl implements PodRecarregavelService{
         return PodRecarregavelResponseDTO.valueOf(entity);
     }
 
-    private void validar(PodRecarregavelDTO podRecarregavellDTO) throws ConstraintViolationException {
-        Set<ConstraintViolation<PodRecarregavelDTO>> violations = validator.validate(podRecarregavellDTO);
+    private void validar(PodRecarregavelDTO podRecarregavelDTO) throws ConstraintViolationException {
+        Set<ConstraintViolation<PodRecarregavelDTO>> violations = validator.validate(podRecarregavelDTO);
         if (!violations.isEmpty())
             throw new ConstraintViolationException(violations);
 
