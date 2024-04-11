@@ -9,3 +9,5 @@ insert into cidade (nome, id_estado) values( 'Paraíso', 1);
 insert into cidade (nome, id_estado) values( 'Gurupi', 1);
 insert into cidade (nome, id_estado) values( 'Goiânia', 2);
 insert into cidade (nome, id_estado) values( 'Anápolis', 2);
+
+insert into cor (cor) values('blue');
