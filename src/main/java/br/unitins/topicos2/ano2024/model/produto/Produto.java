@@ -10,7 +10,7 @@ import jakarta.persistence.InheritanceType;
 @Inheritance(strategy = InheritanceType.JOINED) // Herança
 public abstract class Produto extends DefaultEntity {
 
-    @Column(nullable = true)
+    @Column(nullable = false)
     private String nome;
     private Double valor;
     private String descricao;
