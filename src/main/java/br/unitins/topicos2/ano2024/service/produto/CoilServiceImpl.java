@@ -8,6 +8,8 @@ import br.unitins.topicos2.ano2024.dto.produto.CoilDTO;
 import br.unitins.topicos2.ano2024.dto.produto.CoilResponseDTO;
 import br.unitins.topicos2.ano2024.model.produto.Coil;
 import br.unitins.topicos2.ano2024.repository.produto.CoilRepository;
+import br.unitins.topicos2.ano2024.repository.produto.MarcaRepository;
+import br.unitins.topicos2.ano2024.repository.produto.ResistenciaRepository;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
@@ -21,6 +23,12 @@ import jakarta.ws.rs.NotFoundException;
 public class CoilServiceImpl implements CoilService{
     @Inject
     CoilRepository coilRepository;
+
+    @Inject
+    ResistenciaRepository resistenciaRepository;
+
+    @Inject
+    MarcaRepository marcaRepository;
 
     @Inject
     Validator validator;
@@ -52,6 +60,12 @@ public class CoilServiceImpl implements CoilService{
         entity.setNome(coilDTO.nome());
         entity.setValor(coilDTO.valor());
         entity.setDescricao(coilDTO.descricao());
+        entity.setListaResistencia(coilDTO.listaResistencia().stream().map(id -> {
+            return resistenciaRepository.findById(id);
+        } ).toList());
+        entity.setListaMarca(coilDTO.listaMarca().stream().map(id -> {
+            return marcaRepository.findById(id);
+        }).toList());
 
         coilRepository.persist(entity);
 

@@ -9,8 +9,8 @@ public record NicSaltDTO(
     String nome,
     Double valor,
     String descricao,
-    List<SaborDTO> listaSabor,
-    List<MarcaDTO> listaMarca
+    List<Long> listaSabor,
+    List<Long> listaMarca
 ) {
     
 }

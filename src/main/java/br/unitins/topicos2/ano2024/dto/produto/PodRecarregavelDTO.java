@@ -9,8 +9,8 @@ public record PodRecarregavelDTO(
     String nome,
     Double valor,
     String descricao,
-    List<CorDTO> listaCor,
-    List<MarcaDTO> listaMarca
+    List<Long> listaCor,
+    List<Long> listaMarca
 
 ) {
     

@@ -7,7 +7,10 @@ import java.util.stream.Collectors;
 import br.unitins.topicos2.ano2024.dto.produto.PodDescartavelDTO;
 import br.unitins.topicos2.ano2024.dto.produto.PodDescartavelResponseDTO;
 import br.unitins.topicos2.ano2024.model.produto.PodDescartavel;
+import br.unitins.topicos2.ano2024.repository.produto.MarcaRepository;
 import br.unitins.topicos2.ano2024.repository.produto.PodDescartavelRepository;
+import br.unitins.topicos2.ano2024.repository.produto.PuffRepository;
+import br.unitins.topicos2.ano2024.repository.produto.SaborRepository;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
@@ -22,6 +25,15 @@ public class PodDescartavelServiceImpl implements PodDescartavelService{
     
     @Inject
     PodDescartavelRepository podDescartavelRepository;
+
+    @Inject
+    SaborRepository saborRepository;
+
+    @Inject
+    PuffRepository puffRepository;
+
+    @Inject
+    MarcaRepository marcaRepository;
 
     @Inject
     Validator validator;
@@ -53,6 +65,15 @@ public class PodDescartavelServiceImpl implements PodDescartavelService{
         entity.setNome(podDescartavelDTO.nome());
         entity.setValor(podDescartavelDTO.valor());
         entity.setDescricao(podDescartavelDTO.descricao());
+        entity.setListaSabor(podDescartavelDTO.listaMarca().stream().map(id -> {
+            return saborRepository.findById(id);
+        }).toList());
+        entity.setListaPuff(podDescartavelDTO.listaMarca().stream().map(id -> {
+            return puffRepository.findById(id);
+        }).toList());
+        entity.setListaMarca(podDescartavelDTO.listaMarca().stream().map(id -> {
+            return marcaRepository.findById(id);
+        }).toList());
 
         podDescartavelRepository.persist(entity);
 
@@ -69,6 +90,7 @@ public class PodDescartavelServiceImpl implements PodDescartavelService{
         entity.setNome(podDescartavelDTO.nome());
         entity.setValor(podDescartavelDTO.valor());
         entity.setDescricao(podDescartavelDTO.descricao());
+
 
         return PodDescartavelResponseDTO.valueOf(entity);
     }

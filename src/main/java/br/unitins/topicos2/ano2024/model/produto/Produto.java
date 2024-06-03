@@ -34,6 +34,4 @@ public abstract class Produto extends DefaultEntity {
         this.descricao = descricao;
     }
 
-    
-
 }

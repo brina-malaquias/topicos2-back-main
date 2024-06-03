@@ -9,7 +9,7 @@ public record CoilDTO(
     String nome,
     Double valor,
     String descricao,
-    List<ResistenciaDTO> listaResistencia,
-    List<MarcaDTO> listaMarca
+    List<Long> listaResistencia,
+    List<Long> listaMarca
 ) {
 }

@@ -7,6 +7,8 @@ import java.util.stream.Collectors;
 import br.unitins.topicos2.ano2024.dto.produto.PodRecarregavelDTO;
 import br.unitins.topicos2.ano2024.dto.produto.PodRecarregavelResponseDTO;
 import br.unitins.topicos2.ano2024.model.produto.PodRecarregavel;
+import br.unitins.topicos2.ano2024.repository.produto.CorRepository;
+import br.unitins.topicos2.ano2024.repository.produto.MarcaRepository;
 import br.unitins.topicos2.ano2024.repository.produto.PodRecarregavelRepository;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
@@ -22,6 +24,12 @@ public class PodRecarregavelServiceImpl implements PodRecarregavelService{
     
     @Inject
     PodRecarregavelRepository podRecarregavelRepository;
+
+    @Inject
+    CorRepository corRepository;
+
+    @Inject
+    MarcaRepository marcaRepository;
 
     @Inject
     Validator validator;
@@ -53,6 +61,12 @@ public class PodRecarregavelServiceImpl implements PodRecarregavelService{
         entity.setNome(podRecarregavelDTO.nome());
         entity.setValor(podRecarregavelDTO.valor());
         entity.setDescricao(podRecarregavelDTO.descricao());
+        entity.setListaCor(podRecarregavelDTO.listaMarca().stream().map(id -> {
+            return corRepository.findById(id);
+        }).toList());
+        entity.setListaMarca(podRecarregavelDTO.listaMarca().stream().map(id -> {
+            return marcaRepository.findById(id);
+        }).toList());
 
         podRecarregavelRepository.persist(entity);
 

@@ -7,7 +7,9 @@ import java.util.stream.Collectors;
 import br.unitins.topicos2.ano2024.dto.produto.NicSaltDTO;
 import br.unitins.topicos2.ano2024.dto.produto.NicSaltResponseDTO;
 import br.unitins.topicos2.ano2024.model.produto.NicSalt;
+import br.unitins.topicos2.ano2024.repository.produto.MarcaRepository;
 import br.unitins.topicos2.ano2024.repository.produto.NicSaltRepository;
+import br.unitins.topicos2.ano2024.repository.produto.SaborRepository;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
@@ -22,6 +24,12 @@ public class NicSaltServiceImpl implements NicSaltService{
     
     @Inject
     NicSaltRepository nicSaltRepository;
+
+    @Inject
+    MarcaRepository marcaRepository;
+
+    @Inject
+    SaborRepository saborRepository;
 
     @Inject
     Validator validator;
@@ -53,6 +61,12 @@ public class NicSaltServiceImpl implements NicSaltService{
         entity.setNome(nicSaltDTO.nome());
         entity.setValor(nicSaltDTO.valor());
         entity.setDescricao(nicSaltDTO.descricao());
+        entity.setListaSabor(nicSaltDTO.listaMarca().stream().map(id -> {
+            return saborRepository.findById(id);
+        }).toList());
+        entity.setListaMarca(nicSaltDTO.listaMarca().stream().map(id -> {
+            return marcaRepository.findById(id);
+        }).toList());
 
         nicSaltRepository.persist(entity);
 

@@ -9,9 +9,9 @@ public record PodDescartavelDTO(
     String nome,
     Double valor,
     String descricao,
-    List<SaborDTO> listaSabor,
-    List<PuffDTO> listaPuff,
-    List<MarcaDTO> listaMarca
+    List<Long> listaSabor,
+    List<Long> listaPuff,
+    List<Long> listaMarca
 ) {
     
 }
