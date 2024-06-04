@@ -3,9 +3,11 @@ package br.unitins.topicos2.ano2024.service.usuario;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.unitins.topicos2.ano2024.dto.endereco.EnderecoDTO;
 import br.unitins.topicos2.ano2024.dto.usuario.TelefoneDTO;
 import br.unitins.topicos2.ano2024.dto.usuario.UsuarioDTO;
 import br.unitins.topicos2.ano2024.dto.usuario.UsuarioResponseDTO;
+import br.unitins.topicos2.ano2024.model.endereco.Endereco;
 import br.unitins.topicos2.ano2024.model.usuario.Telefone;
 import br.unitins.topicos2.ano2024.model.usuario.TipoUsuario;
 import br.unitins.topicos2.ano2024.model.usuario.Usuario;
@@ -55,6 +57,20 @@ public class UsuarioServiceImpl implements UsuarioService {
                 telefone.setCodigoArea(tel.codigoArea());
                 telefone.setNumero(tel.numero());
                 novoUsuario.getListaTelefone().add(telefone);
+            }
+        }
+
+        if (dto.listaEndereco() != null && 
+                    !dto.listaEndereco().isEmpty()){
+            novoUsuario.setListaEndereco(new ArrayList<Endereco>());
+            for (EnderecoDTO end : dto.listaEndereco()) {
+                Endereco endereco = new Endereco();
+                endereco.setLogradouro(end.logadouro());
+                endereco.setBairro(end.bairro());
+                endereco.setNumero(end.numero());
+                endereco.setComplemento(end.complemento());
+                endereco.setCep(end.cep());
+                novoUsuario.getListaEndereco().add(endereco);
             }
         }
 

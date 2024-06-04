@@ -1,8 +1,10 @@
 package br.unitins.topicos2.ano2024.model.usuario;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import br.unitins.topicos2.ano2024.model.DefaultEntity;
+import br.unitins.topicos2.ano2024.model.endereco.Endereco;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
@@ -22,6 +24,13 @@ public class Usuario extends DefaultEntity {
                 joinColumns = @JoinColumn(name = "id_usuario"), 
                 inverseJoinColumns = @JoinColumn(name = "id_telefone"))
     private List<Telefone> listaTelefone;
+
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinTable(name = "usuario_endereco", 
+                joinColumns = @JoinColumn(name = "id_usuario"), 
+                inverseJoinColumns = @JoinColumn(name = "id_endereco"))
+    private List<Endereco> listaEndereco;
 
 
 
@@ -80,6 +89,16 @@ public class Usuario extends DefaultEntity {
     public void setListaTelefone(List<Telefone> listaTelefone) {
         this.listaTelefone = listaTelefone;
     }
+
+    public List<Endereco> getListaEndereco() {
+        return listaEndereco;
+    }
+
+    public void setListaEndereco(List<Endereco> listaEndereco) {
+        this.listaEndereco = listaEndereco;
+    }
+
+
 
     
 }

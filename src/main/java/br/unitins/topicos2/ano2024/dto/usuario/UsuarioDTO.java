@@ -2,6 +2,7 @@ package br.unitins.topicos2.ano2024.dto.usuario;
 
 import java.util.List;
 
+import br.unitins.topicos2.ano2024.dto.endereco.EnderecoDTO;
 import jakarta.validation.constraints.NotBlank;
 
 public record UsuarioDTO(
@@ -12,7 +13,8 @@ public record UsuarioDTO(
     String senha,
     String cpf,
     Integer idTipoUsuario,
-    List<TelefoneDTO> listaTelefone
+    List<TelefoneDTO> listaTelefone,
+    List<EnderecoDTO> listaEndereco
 
 ) {
     
