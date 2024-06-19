@@ -14,7 +14,8 @@ public record UsuarioResponseDTO(
     String senha,
     String cpf,
     TipoUsuario tipoUsuario,
-    List<TelefoneDTO> listaTelefone
+    List<TelefoneDTO> listaTelefone,
+    List<EnderecoDTO> listaEndereco
 
 ) {
     public static UsuarioResponseDTO valueOf(Usuario usuario){
@@ -27,9 +28,12 @@ public record UsuarioResponseDTO(
             usuario.getSenha(),
             usuario.getCpf(),
             usuario.getTipoUsuario(),
-                Optional.ofNullable(usuario.getListaTelefone())
-                        .map(telefones -> telefones.stream().map(TelefoneDTO::valueOf).toList())
-                        .orElse(null)
+            Optional.ofNullable(usuario.getListaTelefone())
+                    .map(telefones -> telefones.stream().map(TelefoneDTO::valueOf).toList())
+                    .orElse(null),
+            Optional.ofNullable(usuario.getListaEndereco())
+                    .map(enderecos -> enderecos.stream().map(EnderecoDTO::valueOf).toList())
+                    .orElse(null)
         );
     }
 }

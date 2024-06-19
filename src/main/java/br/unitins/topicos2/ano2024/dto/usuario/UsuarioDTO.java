@@ -12,7 +12,8 @@ public record UsuarioDTO(
     String senha,
     String cpf,
     Integer idTipoUsuario,
-    List<TelefoneDTO> listaTelefone
+    List<TelefoneDTO> listaTelefone,
+    List<EnderecoDTO> listaEndereco
 
 ) {
     
