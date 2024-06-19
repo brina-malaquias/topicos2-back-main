@@ -28,12 +28,12 @@ public record UsuarioResponseDTO(
             usuario.getSenha(),
             usuario.getCpf(),
             usuario.getTipoUsuario(),
-            Optional.ofNullable(usuario.getListaTelefone())
-                    .map(telefones -> telefones.stream().map(TelefoneDTO::valueOf).toList())
-                    .orElse(null),
-            Optional.ofNullable(usuario.getListaEndereco())
-                    .map(enderecos -> enderecos.stream().map(EnderecoDTO::valueOf).toList())
-                    .orElse(null)
+                Optional.ofNullable(usuario.getListaTelefone())
+                        .map(telefones -> telefones.stream().map(TelefoneDTO::valueOf).toList())
+                        .orElse(null),
+                Optional.ofNullable(usuario.getListaEndereco())
+                        .map(endereco -> endereco.stream().map(EnderecoDTO::valueOf).toList())
+                        .orElse(null)
         );
     }
 }
