@@ -94,5 +94,4 @@ public class Usuario extends DefaultEntity {
     }
 
     
-    
 }
