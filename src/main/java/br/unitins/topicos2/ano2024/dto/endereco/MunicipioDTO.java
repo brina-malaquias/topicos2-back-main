@@ -3,7 +3,7 @@ package br.unitins.topicos2.ano2024.dto.endereco;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
-public record CidadeDTO(
+public record MunicipioDTO(
     @NotBlank(message = "O campo nome deve ser informado.")
     String nome,
 

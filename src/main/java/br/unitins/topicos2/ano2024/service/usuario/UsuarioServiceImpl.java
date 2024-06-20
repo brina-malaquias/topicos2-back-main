@@ -47,10 +47,10 @@ public class UsuarioServiceImpl implements UsuarioService {
 
         novoUsuario.setTipoUsuario(TipoUsuario.valueOf(dto.idTipoUsuario()));
 
-        if (dto.listaTelefone() != null && 
-                    !dto.listaTelefone().isEmpty()){
+        if (dto.telefones() != null && 
+                    !dto.telefones().isEmpty()){
             novoUsuario.setListaTelefone(new ArrayList<Telefone>());
-            for (TelefoneDTO tel : dto.listaTelefone()) {
+            for (TelefoneDTO tel : dto.telefones()) {
                 Telefone telefone = new Telefone();
                 telefone.setCodigoArea(tel.codigoArea());
                 telefone.setNumero(tel.numero());

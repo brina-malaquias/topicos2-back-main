@@ -8,21 +8,23 @@ import jakarta.validation.Valid;
 
 public interface EstadoService {
 
-        // recursos basicos
-        List<EstadoResponseDTO> getAll(int page, int pageSize);
+    List<EstadoResponseDTO> getAll();
 
-        EstadoResponseDTO findById(Long id);
-    
-        EstadoResponseDTO create(@Valid EstadoDTO dto);
-    
-        EstadoResponseDTO update(Long id, EstadoDTO dto);
-    
-        void delete(Long id);
-    
-        // recursos extras
-    
-        List<EstadoResponseDTO> findByNome(String nome);
-    
-        long count();
+    EstadoResponseDTO findById(Long id);
+
+    EstadoResponseDTO create(@Valid EstadoDTO productDTO);
+
+    EstadoResponseDTO update(Long id, @Valid EstadoDTO productDTO);
+
+    List<EstadoResponseDTO> findAllPaginado(int pageNumber, int pageSize);
+
+    void delete(Long id);
+
+    List<EstadoResponseDTO> findByFiltro(String nome, String situacao, int pageNumber, int pageSize);
+
+    Long count();
+
+    Long countByFiltro(String nome, String situacao);
+
 
 }

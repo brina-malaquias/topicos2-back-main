@@ -7,7 +7,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 
 @Entity
-public class Cidade extends DefaultEntity {
+public class Municipio extends DefaultEntity {
     
     @Column(nullable = false, length = 60)
     private String nome;

@@ -1,14 +1,10 @@
 package br.unitins.topicos2.ano2024.resource.endereco;
-import org.jboss.logging.Logger;
 
-import br.unitins.topicos2.ano2024.application.Result;
-import br.unitins.topicos2.ano2024.dto.endereco.EstadoDTO;
-import br.unitins.topicos2.ano2024.dto.endereco.EstadoResponseDTO;
-import br.unitins.topicos2.ano2024.service.endereco.EstadoService;
 import jakarta.inject.Inject;
 import jakarta.validation.ConstraintViolationException;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
+import jakarta.ws.rs.DefaultValue;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.PUT;
@@ -21,43 +17,49 @@ import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.Response.Status;
 import org.jboss.logging.Logger;
 
+import br.unitins.topicos2.ano2024.application.Result;
+import br.unitins.topicos2.ano2024.dto.endereco.MunicipioDTO;
+import br.unitins.topicos2.ano2024.dto.endereco.MunicipioResponseDTO;
+import br.unitins.topicos2.ano2024.service.endereco.MunicipioService;
+
 import java.util.List;
 
-@Path("/estados")
+@Path("/municipios")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
-public class EstadoResource {
+public class MunicipioResource {
 
     @Inject
-    EstadoService service;
+    MunicipioService service;
 
-    private static final Logger LOG = Logger.getLogger(EstadoResource.class);
+    private static final Logger LOG = Logger.getLogger(MunicipioResource.class);
 
     @GET
-    public List<EstadoResponseDTO> getAll() {
-        LOG.info("Buscando todos os estados.");
-        return service.getAll();
+    public List<MunicipioResponseDTO> getAll(@QueryParam("page") @DefaultValue("0") int page,
+                                             @QueryParam("pageSize") @DefaultValue("10") int pageSize) {
+        LOG.info("Buscando todos os municipios.");
+        return service.getAll(page, pageSize);
     }
 
     @GET
     @Path("/{id}")
-    public EstadoResponseDTO findById(@PathParam("id") Long id) {
-        LOG.info("Buscando um estados pelo id.");
+    public MunicipioResponseDTO findById(@PathParam("id") Long id) {
+        LOG.info("Buscando um município pelo id.");
         return service.findById(id);
     }
 
     @POST
 //    @RolesAllowed({"Admin"})
-    public Response insert(EstadoDTO dto) {
-        LOG.infof("Inserindo um estados: %s", dto.nome());
+    public Response insert(MunicipioDTO dto) {
+        LOG.infof("Inserindo um municipio: %s", dto.nome());
         Result result = null;
 
         try {
-            EstadoResponseDTO response = service.create(dto);
-            LOG.infof("Estado (%d) criado com sucesso.", response.id());
+            MunicipioResponseDTO response = service.create(dto);
+            LOG.infof("Município (%d) criado com sucesso.", response.id());
             return Response.status(Status.CREATED).entity(response).build();
         } catch (ConstraintViolationException e) {
-            LOG.error("Erro ao incluir um estados.");
+            LOG.error("Erro ao incluir um municipio.");
             LOG.debug(e.getMessage());
             result = new Result(e.getConstraintViolations());
         } catch (Exception e) {
@@ -71,16 +73,16 @@ public class EstadoResource {
     @PUT
     @Path("/{id}")
 //    @RolesAllowed({"Admin"})
-    public Response update(@PathParam("id") Long id, EstadoDTO dto) {
-        LOG.infof("Alterando um estados: %s", dto.nome());
+    public Response update(@PathParam("id") Long id, MunicipioDTO dto) {
+        LOG.infof("Alterando um municipio: %s", dto.nome());
         Result result = null;
 
         try {
-            EstadoResponseDTO response = service.update(id, dto);
-            LOG.infof("Estado (%d) alterado com sucesso.", response.id());
+            MunicipioResponseDTO response = service.update(id, dto);
+            LOG.infof("Município (%d) alterado com sucesso.", response.id());
             return Response.ok(response).build();
         } catch (ConstraintViolationException e) {
-            LOG.error("Erro ao alterar um estado.");
+            LOG.error("Erro ao alterar um município.");
             LOG.debug(e.getMessage());
             result = new Result(e.getConstraintViolations());
         } catch (Exception e) {
@@ -95,15 +97,15 @@ public class EstadoResource {
     @Path("/{id}")
 //    @RolesAllowed({"Admin"})
     public Response delete(@PathParam("id") Long id) {
-        LOG.infof("Deletando um estados: %s", id);
+        LOG.infof("Deletando um municipio: %s", id);
         Result result = null;
 
         try {
             service.delete(id);
-            LOG.infof("Estado (%d) deletado com sucesso.", id);
+            LOG.infof("Município (%d) deletado com sucesso.", id);
             return Response.status(Status.NO_CONTENT).build();
         } catch (ConstraintViolationException e) {
-            LOG.error("Erro ao deletar um estado.");
+            LOG.error("Erro ao deletar um município.");
             LOG.debug(e.getMessage());
             result = new Result(e.getConstraintViolations());
         } catch (Exception e) {
@@ -115,20 +117,19 @@ public class EstadoResource {
     }
 
     @GET
-    @Path("/search")
-    public Response search(@QueryParam("page") int pageNumber,
-                           @QueryParam("size") int pageSize,
-                           @QueryParam("nome") String nome,
-                           @QueryParam("situacao") String situacao) {
-        LOG.infof("Pesquisando estados pelo nome: %s", nome);
+    @Path("/search/{nome}")
+    public Response search(@PathParam("nome") String nome,
+                           @QueryParam("page") @DefaultValue("0") int page,
+                           @QueryParam("pageSize") @DefaultValue("10") int pageSize) {
+        LOG.infof("Pesquisando municípios pelo nome: %s", nome);
         Result result = null;
 
         try {
-            List<EstadoResponseDTO> response = service.findByFiltro(nome, situacao, pageNumber, pageSize);
+            List<MunicipioResponseDTO> response = service.findByNome(nome, page, pageSize);
             LOG.infof("Pesquisa realizada com sucesso.");
             return Response.ok(response).build();
         } catch (ConstraintViolationException e) {
-            LOG.error("Erro ao pesquisar estados.");
+            LOG.error("Erro ao pesquisar municípios.");
             LOG.debug(e.getMessage());
             result = new Result(e.getConstraintViolations());
         } catch (Exception e) {
@@ -137,19 +138,25 @@ public class EstadoResource {
         }
 
         return Response.status(Status.NOT_FOUND).entity(result).build();
-    }
-
-    @GET
-    @Path("/search/count")
-    public Long count(@QueryParam("nome") String nome,
-                      @QueryParam("situacao") String situacao) {
-        return service.countByFiltro(nome, situacao);
     }
 
     @GET
     @Path("/count")
-    public Long count() {
+    public long count(){
         return service.count();
     }
+
+    @GET
+    @Path("/search/{nome}/count")
+    public long count(@PathParam("nome") String nome) {
+        return service.countByNome(nome);
+    }
+
+    @GET
+    @Path("/estado/{idEstado}")
+    public List<MunicipioResponseDTO> getByEstado(@PathParam("idEstado") Long idEstado) {
+        return service.findByEstado(idEstado);
+    }
+
 }
 
