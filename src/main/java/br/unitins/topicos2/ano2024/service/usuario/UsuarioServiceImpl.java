@@ -61,19 +61,6 @@ public class UsuarioServiceImpl implements UsuarioService {
             }
         }
 
-        if (dto.listaEndereco() != null && 
-                    !dto.listaEndereco().isEmpty()){
-            novoUsuario.setListaEndereco(new ArrayList<Endereco>());
-            for (EnderecoDTO end : dto.listaEndereco()) {
-                Endereco endereco = new Endereco();
-                endereco.setCep(end.cep());
-                endereco.setBairro(end.bairro());
-                endereco.setEndereco(end.endereco());
-                endereco.setNumero(end.numero());
-                endereco.setComplemento(end.complemento());
-                novoUsuario.getListaEndereco().add(endereco);
-            }
-        }
         repository.persist(novoUsuario);
 
         return UsuarioResponseDTO.valueOf(novoUsuario);
