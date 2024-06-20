@@ -10,11 +10,20 @@ import jakarta.persistence.InheritanceType;
 @Inheritance(strategy = InheritanceType.JOINED) // Herança
 public abstract class Produto extends DefaultEntity {
 
+    private String nomeImagem;
+
     @Column(nullable = false)
     private String nome;
     private Double valor;
     private String descricao;
     
+
+    public String getNomeImagem() {
+        return nomeImagem;
+    }
+    public void setNomeImagem(String nomeImagem) {
+        this.nomeImagem = nomeImagem;
+    }
     public String getNome() {
         return nome;
     }
@@ -33,5 +42,6 @@ public abstract class Produto extends DefaultEntity {
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
+
 
 }

@@ -14,7 +14,6 @@ public record UsuarioDTO(
     Integer idTipoUsuario,
     List<TelefoneDTO> telefones
 
-
 ) {
     
 }

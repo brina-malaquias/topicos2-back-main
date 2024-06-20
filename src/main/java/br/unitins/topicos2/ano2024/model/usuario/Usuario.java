@@ -22,11 +22,9 @@ public class Usuario extends DefaultEntity {
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name = "usuario_telefone", joinColumns = @JoinColumn(name = "id_usuario"), inverseJoinColumns = @JoinColumn(name = "id_telefone"))
     private List<Telefone> listaTelefone;
-
+    
     @OneToMany(mappedBy = "usuario")
     private List<Endereco> listaEndereco;
-
-
 
     public String getNome() {
         return nome;

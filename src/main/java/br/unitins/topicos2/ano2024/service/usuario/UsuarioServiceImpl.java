@@ -3,9 +3,12 @@ package br.unitins.topicos2.ano2024.service.usuario;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.unitins.topicos2.ano2024.dto.usuario.EnderecoDTO;
 import br.unitins.topicos2.ano2024.dto.usuario.TelefoneDTO;
 import br.unitins.topicos2.ano2024.dto.usuario.UsuarioDTO;
 import br.unitins.topicos2.ano2024.dto.usuario.UsuarioResponseDTO;
+import br.unitins.topicos2.ano2024.model.usuario.Endereco;
+
 import br.unitins.topicos2.ano2024.model.usuario.Telefone;
 import br.unitins.topicos2.ano2024.model.usuario.TipoUsuario;
 import br.unitins.topicos2.ano2024.model.usuario.Usuario;
@@ -58,6 +61,19 @@ public class UsuarioServiceImpl implements UsuarioService {
             }
         }
 
+        if (dto.listaEndereco() != null && 
+                    !dto.listaEndereco().isEmpty()){
+            novoUsuario.setListaEndereco(new ArrayList<Endereco>());
+            for (EnderecoDTO end : dto.listaEndereco()) {
+                Endereco endereco = new Endereco();
+                endereco.setCep(end.cep());
+                endereco.setBairro(end.bairro());
+                endereco.setEndereco(end.endereco());
+                endereco.setNumero(end.numero());
+                endereco.setComplemento(end.complemento());
+                novoUsuario.getListaEndereco().add(endereco);
+            }
+        }
         repository.persist(novoUsuario);
 
         return UsuarioResponseDTO.valueOf(novoUsuario);

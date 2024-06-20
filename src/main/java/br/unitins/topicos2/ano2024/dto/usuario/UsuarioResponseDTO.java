@@ -20,6 +20,7 @@ public record UsuarioResponseDTO(
     List<TelefoneResponseDTO> telefones,
     List<EnderecoResponseDTO> enderecos
 
+
 ) {
     public static UsuarioResponseDTO valueOf(Usuario usuario){
 
