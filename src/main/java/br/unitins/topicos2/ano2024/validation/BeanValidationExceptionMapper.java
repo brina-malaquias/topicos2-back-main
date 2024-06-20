@@ -1,5 +1,6 @@
 package br.unitins.topicos2.ano2024.validation;
 
+
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
@@ -27,4 +28,5 @@ public class BeanValidationExceptionMapper implements ExceptionMapper<Constraint
         return Response.status(Response.Status.BAD_REQUEST).entity(validationError).build();
 
     }
+
 }

@@ -5,11 +5,13 @@ import java.util.List;
 import br.unitins.topicos2.ano2024.model.DefaultEntity;
 import br.unitins.topicos2.ano2024.model.endereco.Endereco;
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.OneToMany;
 
+@Entity
 public class Usuario extends DefaultEntity {
 
     private String nome;

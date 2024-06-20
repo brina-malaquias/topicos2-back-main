@@ -1,6 +1,7 @@
 package br.unitins.topicos2.ano2024.validation;
 
-public class ValidationException extends RuntimeException {
+
+public class ValidationException  extends RuntimeException {
 
     private String fieldName;
 
@@ -12,5 +13,5 @@ public class ValidationException extends RuntimeException {
     public String getFieldName() {
         return fieldName;
     }
-    
+
 }

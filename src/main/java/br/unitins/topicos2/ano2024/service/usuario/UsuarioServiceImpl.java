@@ -3,11 +3,9 @@ package br.unitins.topicos2.ano2024.service.usuario;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.unitins.topicos2.ano2024.dto.usuario.EnderecoDTO;
 import br.unitins.topicos2.ano2024.dto.usuario.TelefoneDTO;
 import br.unitins.topicos2.ano2024.dto.usuario.UsuarioDTO;
 import br.unitins.topicos2.ano2024.dto.usuario.UsuarioResponseDTO;
-import br.unitins.topicos2.ano2024.model.usuario.Endereco;
 
 import br.unitins.topicos2.ano2024.model.usuario.Telefone;
 import br.unitins.topicos2.ano2024.model.usuario.TipoUsuario;

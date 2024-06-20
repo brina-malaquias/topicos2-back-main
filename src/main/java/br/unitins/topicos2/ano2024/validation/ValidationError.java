@@ -1,9 +1,12 @@
 package br.unitins.topicos2.ano2024.validation;
 
+
+import br.unitins.topicos2.ano2024.util.Error;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class ValidationError extends br.unitins.topicos2.ano2024.util.Error {
+public class ValidationError extends Error {
 
     record FieldError(String fieldName, String message) {};
 
@@ -22,5 +25,5 @@ public class ValidationError extends br.unitins.topicos2.ano2024.util.Error {
     public List<FieldError> getErrors() {
         return errors.stream().toList();
     }
-  
+
 }

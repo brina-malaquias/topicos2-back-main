@@ -1,5 +1,6 @@
 package br.unitins.topicos2.ano2024.util;
 
+
 public class Error {
 
     private String code;
@@ -22,6 +23,4 @@ public class Error {
         this.message = message;
     }
 
-    
-    
 }

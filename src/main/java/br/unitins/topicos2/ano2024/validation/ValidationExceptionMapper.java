@@ -1,9 +1,11 @@
 package br.unitins.topicos2.ano2024.validation;
 
+
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.ws.rs.core.Response;
-import jakarta.ws.rs.ext.ExceptionMapper;
 import jakarta.ws.rs.ext.Provider;
+import jakarta.ws.rs.ext.ExceptionMapper;
+
 
 @Provider
 @ApplicationScoped
@@ -19,4 +21,5 @@ public class ValidationExceptionMapper implements ExceptionMapper<ValidationExce
         return Response.status(Response.Status.BAD_REQUEST).entity(validationError).build();
 
     }
+
 }
