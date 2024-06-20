@@ -16,6 +16,9 @@ public abstract class Produto extends DefaultEntity {
     private String nome;
     private Double valor;
     private String descricao;
+    @Column(nullable = false)
+    private Integer estoque;
+    private Boolean ativo;
     
 
     public String getNomeImagem() {
@@ -42,6 +45,20 @@ public abstract class Produto extends DefaultEntity {
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
+    public Integer getEstoque() {
+        return estoque;
+    }
+    public void setEstoque(Integer estoque) {
+        this.estoque = estoque;
+    }
+    public Boolean getAtivo() {
+        return ativo;
+    }
+    public void setAtivo(Boolean ativo) {
+        this.ativo = ativo;
+    }
+
+    
 
 
 }
