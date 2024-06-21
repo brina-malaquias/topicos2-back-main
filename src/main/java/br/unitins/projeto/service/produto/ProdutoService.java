@@ -20,13 +20,10 @@ public interface ProdutoService {
 
     void delete(Long id);
 
-    List<ProdutoResponseDTO> findByNome(String nome, Boolean ativo, int pageNumber, int pageSize);
 
-    ProdutoResponseDTO alterarSituacao(Long id, Boolean ativo);
 
     List<ProdutoResponseDTO> findAllPaginado(int pageNumber, int pageSize);
 
-    Long countByNome(String nome, Boolean ativo);
 
     Long count();
 

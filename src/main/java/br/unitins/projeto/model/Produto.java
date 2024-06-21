@@ -25,9 +25,6 @@ public class Produto extends DefaultEntity {
     @Column(name = "nome_imagem")
     private String nomeImagem;
 
-    @Column(nullable = false)
-    private Boolean ativo;
-
 
     public String getNome() {
         return nome;
@@ -61,13 +58,6 @@ public class Produto extends DefaultEntity {
         this.estoque = estoque;
     }
 
-    public Boolean getAtivo() {
-        return ativo;
-    }
-
-    public void setAtivo(Boolean ativo) {
-        this.ativo = ativo;
-    }
 
     public String getNomeImagem() {
         return nomeImagem;

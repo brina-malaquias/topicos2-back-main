@@ -7,7 +7,6 @@ public record ProdutoResponseDTO(
         String nome,
         String descricao,
         Double valor,
-        Boolean ativo,
         Integer estoque,
 
         String nomeImagem
@@ -18,7 +17,6 @@ public record ProdutoResponseDTO(
         entity.getNome(),
         entity.getDescricao(),
         entity.getValor(),
-        entity.getAtivo(),
         entity.getEstoque(),
 
         entity.getNomeImagem());

@@ -64,7 +64,6 @@ public class ProdutoServiceImpl implements ProdutoService {
         entity.setNome(produtoDTO.nome());
         entity.setDescricao(produtoDTO.descricao());
         entity.setEstoque(produtoDTO.estoque());
-        entity.setAtivo(Boolean.TRUE);
         entity.setValor(produtoDTO.valor());
         repository.persist(entity);
         return new ProdutoResponseDTO(entity);
@@ -85,7 +84,6 @@ public class ProdutoServiceImpl implements ProdutoService {
         entity.setDescricao(produtoDTO.descricao());
         entity.setEstoque(produtoDTO.estoque());
         entity.setValor(produtoDTO.valor());
-        entity.setAtivo(entity.getAtivo());
 
         repository.persist(entity);
 
@@ -97,26 +95,6 @@ public class ProdutoServiceImpl implements ProdutoService {
     @Transactional
     public void delete(Long id) {
         repository.deleteById(id);
-    }
-
-    @Override
-    public List<ProdutoResponseDTO> findByNome(String nome, Boolean ativo, int pageNumber, int pageSize) {
-        List<Produto> list = this.repository.findByFiltro(nome, ativo)
-                .page(Page.of(pageNumber, pageSize))
-                .list().stream()
-                .sorted(Comparator.comparing(Produto::getNome))
-                .collect(Collectors.toList());
-
-        return list.stream().map(ProdutoResponseDTO::new).collect(Collectors.toList());
-    }
-
-    @Override
-    @Transactional
-    public ProdutoResponseDTO alterarSituacao(Long id, Boolean dto) {
-        Produto entity = repository.findById(id);
-        entity.setAtivo(dto);
-
-        return new ProdutoResponseDTO(entity);
     }
 
     @Override
@@ -133,10 +111,7 @@ public class ProdutoServiceImpl implements ProdutoService {
         return lista.stream().map(ProdutoResponseDTO::new).collect(Collectors.toList());
     }
 
-    @Override
-    public Long countByNome(String nome, Boolean ativo) {
-        return repository.findByFiltro(nome, ativo).count();
-    }
+
 
     @Override
     @Transactional
