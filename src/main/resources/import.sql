@@ -27,10 +27,9 @@ insert into pixrecebimento(id, chave, tipo_chave, ativo) values (2, 'petisco@gma
 insert into pixrecebimento(id, chave, tipo_chave, ativo) values (3, '000000213233', 2, false);
 insert into pixrecebimento(id, chave, tipo_chave, ativo) values (4, 'petiscopetisco', 1, false);
 
-insert into boletorecebimento(id, banco, nome, cnpj, agencia, conta, ativo) values (5, '123', 'Pet Isco Comércio e Participações S/A', '111233232231', '12345', '1234', true);
-insert into boletorecebimento(id, banco, nome, cnpj, agencia, conta, ativo) values (6, '123', 'Pet Isco LTDA', '111233232231', '12345', '1234', false);
-insert into boletorecebimento(id, banco, nome, cnpj, agencia, conta, ativo) values (7, '001', 'Pet Isco LTDA', '111233232231', '53412', '3412', false);
-insert into boletorecebimento(id, banco, nome, cnpj, agencia, conta, ativo) values (8, '001', 'Pet Isco LTDA - S/A', '111233232231', '53412', '3412', false);
+insert into boletorecebimento(id, banco, nome, cnpj, agencia, conta, ativo) values (5, '123', 'MalakaPods S/A', '111233232231', '12345', '1234', true);
+insert into boletorecebimento(id, banco, nome, cnpj, agencia, conta, ativo) values (6, '123', 'MalakaPods LTDA', '111233232231', '12345', '1234', false);
+
 
 INSERT INTO Estado (dataInclusao, dataAlteracao, sigla, nome)
 VALUES ('2023-12-07 08:35:00', '2023-12-07 08:40:00', 'TO', 'Tocantins');
@@ -38,11 +37,6 @@ VALUES ('2023-12-07 08:35:00', '2023-12-07 08:40:00', 'TO', 'Tocantins');
 INSERT INTO Municipio (dataInclusao, dataAlteracao, nome, id_estado)
 VALUES ('2023-12-07 08:45:00', '2023-12-07 08:50:00', 'Palmas', 1);
 
-INSERT INTO Endereco (dataInclusao, dataAlteracao, principal, logradouro, bairro, numero, complemento, cep, titulo, id_municipio, id_usuario)
-VALUES ('2023-12-07 09:00:00', '2023-12-07 09:05:00', true, 'Rua das Flores', 'Centro', '123', 'Apartamento 101', '77000000', 'Casa', 1, 1);
-
-INSERT INTO Endereco (dataInclusao, dataAlteracao, principal, logradouro, bairro, numero, complemento, cep, titulo, id_municipio, id_usuario)
-VALUES ('2023-12-07 09:00:00', '2023-12-07 09:05:00', false, 'Rua Floresta', 'AurenyII', '135', null , '77603170', 'Casa', 1, 1);
 
 INSERT INTO Telefone (dataInclusao, dataAlteracao, codigoArea, numero)
 VALUES ('2023-12-07 09:10:00', '2023-12-07 09:15:00', '63', '912345678');

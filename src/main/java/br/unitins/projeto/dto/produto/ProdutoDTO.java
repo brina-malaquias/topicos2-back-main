@@ -4,7 +4,6 @@ public record ProdutoDTO(
 
     String nome,
     String descricao,
-    Double valor,
-    Integer estoque
-) {
+    Double valor
+    ) {
 }

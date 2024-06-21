@@ -19,9 +19,6 @@ public class Produto extends DefaultEntity {
     @Column(nullable = false)
     private Double valor;
 
-    @Column(nullable = false)
-    private Integer estoque;
-
     @Column(name = "nome_imagem")
     private String nomeImagem;
 
@@ -49,15 +46,6 @@ public class Produto extends DefaultEntity {
     public void setValor(Double valor) {
         this.valor = valor;
     }
-
-    public Integer getEstoque() {
-        return estoque;
-    }
-
-    public void setEstoque(Integer estoque) {
-        this.estoque = estoque;
-    }
-
 
     public String getNomeImagem() {
         return nomeImagem;

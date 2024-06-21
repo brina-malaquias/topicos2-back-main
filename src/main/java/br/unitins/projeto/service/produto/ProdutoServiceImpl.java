@@ -20,7 +20,6 @@ import jakarta.ws.rs.NotFoundException;
 import java.io.IOException;
 import java.io.NotActiveException;
 
-import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -63,7 +62,6 @@ public class ProdutoServiceImpl implements ProdutoService {
         Produto entity = new Produto();
         entity.setNome(produtoDTO.nome());
         entity.setDescricao(produtoDTO.descricao());
-        entity.setEstoque(produtoDTO.estoque());
         entity.setValor(produtoDTO.valor());
         repository.persist(entity);
         return new ProdutoResponseDTO(entity);
@@ -82,7 +80,6 @@ public class ProdutoServiceImpl implements ProdutoService {
 
         entity.setNome(produtoDTO.nome());
         entity.setDescricao(produtoDTO.descricao());
-        entity.setEstoque(produtoDTO.estoque());
         entity.setValor(produtoDTO.valor());
 
         repository.persist(entity);
