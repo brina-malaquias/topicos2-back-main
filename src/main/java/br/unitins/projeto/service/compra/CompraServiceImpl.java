@@ -15,7 +15,6 @@ import br.unitins.projeto.model.ItemCompra;
 import br.unitins.projeto.model.MetodoDePagamento;
 import br.unitins.projeto.model.Pix;
 import br.unitins.projeto.model.PixRecebimento;
-import br.unitins.projeto.model.Produto;
 import br.unitins.projeto.model.StatusCompra;
 import br.unitins.projeto.model.Usuario;
 import br.unitins.projeto.repository.BoletoRecebimentoRepository;

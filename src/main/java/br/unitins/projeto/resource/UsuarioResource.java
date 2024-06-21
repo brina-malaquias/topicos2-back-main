@@ -225,18 +225,4 @@ public class UsuarioResource {
     public Response getPerfis(){
         return Response.ok(Perfil.values()).build();
     }
-
-    /* 
-    @GET
-    @Path("/relatorio")
-    @Produces("application/pdf")
-    @RolesAllowed({"Administrador"})
-    public Response gerarRelatorioPDF() {
-        byte[] pdf = service.criarRelatorioUsuarios();
-        Response.ResponseBuilder response = Response.ok(pdf);
-        response.header("Content-Disposition", "attachment;filename=relatorioUsuariosPetIsco.pdf");
-        return response.build();
-
-    }
-*/
 }

@@ -56,15 +56,6 @@ public record UsuarioResponseDTO(
         return null;
     }
 
-//    public static List<ArtigoCeramicaResponseDTO> gerarListaDesejoDTO(List<Produto> list) {
-//        if (list != null)
-//            return list.stream()
-//                    .map(produto -> (ArtigoCeramica) produto)
-//                    .map(ArtigoCeramicaResponseDTO::new)
-//                    .collect(Collectors.toList());
-//        return null;
-//    }
-
     public static List<TelefoneResponseDTO> gerarTelefoneDTO(List<Telefone> list) {
         if (list != null) {
             return list.stream()
