@@ -45,6 +45,7 @@ public class CoilResource {
     private static final Logger LOG = Logger.getLogger(CoilResource.class);
 
     @POST
+    @RolesAllowed({"Administrador"})
     public Response create(CoilDTO dto) {
         CoilResponseDTO retorno = service.create(dto);
         //return Response.status(Status.CREATED).entity(retorno).build();
@@ -54,6 +55,7 @@ public class CoilResource {
     @PUT
     @Transactional
     @Path("/{id}")
+    @RolesAllowed({"Administrador"})
     public Response update(CoilDTO dto, @PathParam("id") Long id) {
         service.update(id, dto);
         return Response.status(Status.NO_CONTENT).build();
@@ -62,6 +64,7 @@ public class CoilResource {
     @DELETE
     @Transactional
     @Path("/{id}")
+    @RolesAllowed({"Administrador"})
     public Response delete(@PathParam("id") Long id) {
         service.delete(id);
         return Response.status(Status.NO_CONTENT).build();
@@ -95,7 +98,6 @@ public class CoilResource {
 
     @GET
     @Path("/image/download/{nomeImagem}")
-    @RolesAllowed({"Administrador", "Comum"})
     @Produces(MediaType.APPLICATION_OCTET_STREAM)
     public Response download(@PathParam("nomeImagem") String nomeImagem) {
         Response.ResponseBuilder response = Response.ok(fileService.download(nomeImagem, "coil"));

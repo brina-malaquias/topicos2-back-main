@@ -43,6 +43,7 @@ public class PodRecarregavelResource {
     private static final Logger LOG = Logger.getLogger(PodRecarregavelResource.class);
 
     @POST
+    @RolesAllowed({"Administrador"})
     public Response create(PodRecarregavelDTO dto) {
         PodRecarregavelResponseDTO retorno = service.create(dto);
         //return Response.status(Status.CREATED).entity(retorno).build();
@@ -52,6 +53,7 @@ public class PodRecarregavelResource {
     @PUT
     @Transactional
     @Path("/{id}")
+    @RolesAllowed({"Administrador"})
     public Response update(PodRecarregavelDTO dto, @PathParam("id") Long id) {
         service.update(id, dto);
         return Response.status(Status.NO_CONTENT).build();
@@ -60,6 +62,7 @@ public class PodRecarregavelResource {
     @DELETE
     @Transactional
     @Path("/{id}")
+    @RolesAllowed({"Administrador"})
     public Response delete(@PathParam("id") Long id) {
         service.delete(id);
         return Response.status(Status.NO_CONTENT).build();
@@ -93,7 +96,6 @@ public class PodRecarregavelResource {
 
     @GET
     @Path("/image/download/{nomeImagem}")
-    @RolesAllowed({"Administrador", "Comum"})
     @Produces(MediaType.APPLICATION_OCTET_STREAM)
     public Response download(@PathParam("nomeImagem") String nomeImagem) {
         Response.ResponseBuilder response = Response.ok(fileService.download(nomeImagem, "podRecarregavel"));

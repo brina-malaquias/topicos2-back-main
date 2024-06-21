@@ -1,6 +1,7 @@
 package br.unitins.projeto.resource.produto;
 
 
+import jakarta.annotation.security.RolesAllowed;
 import org.jboss.logging.Logger;
 
 import br.unitins.projeto.dto.produto.resistencia.ResistenciaDTO;
@@ -34,6 +35,7 @@ public class ResistenciaResource {
     private static final Logger LOG = Logger.getLogger(ResistenciaResource.class);
 
     @POST
+    @RolesAllowed({"Administrador"})
     public Response create(ResistenciaDTO dto) {
         ResistenciaResponseDTO retorno = service.create(dto);
         //return Response.status(Status.CREATED).entity(retorno).build();
@@ -43,6 +45,7 @@ public class ResistenciaResource {
     @PUT
     @Transactional
     @Path("/{id}")
+    @RolesAllowed({"Administrador"})
     public Response update(ResistenciaDTO dto, @PathParam("id") Long id) {
         service.update(id, dto);
         return Response.status(Status.NO_CONTENT).build();
@@ -51,6 +54,7 @@ public class ResistenciaResource {
     @DELETE
     @Transactional
     @Path("/{id}")
+    @RolesAllowed({"Administrador"})
     public Response delete(@PathParam("id") Long id) {
         service.delete(id);
         return Response.status(Status.NO_CONTENT).build();

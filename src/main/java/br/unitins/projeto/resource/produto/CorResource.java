@@ -1,6 +1,7 @@
 package br.unitins.projeto.resource.produto;
 
 
+import jakarta.annotation.security.RolesAllowed;
 import org.jboss.logging.Logger;
 
 import br.unitins.projeto.dto.produto.cor.CorDTO;
@@ -33,6 +34,7 @@ public class CorResource {
     private static final Logger LOG = Logger.getLogger(CorResource.class);
 
     @POST
+    @RolesAllowed({"Administrador"})
     public Response create(CorDTO dto) {
         CorResponseDTO retorno = service.create(dto);
         //return Response.status(Status.CREATED).entity(retorno).build();
@@ -42,6 +44,7 @@ public class CorResource {
     @PUT
     @Transactional
     @Path("/{id}")
+    @RolesAllowed({"Administrador"})
     public Response update(CorDTO dto, @PathParam("id") Long id) {
         service.update(id, dto);
         return Response.status(Status.NO_CONTENT).build();
@@ -50,6 +53,7 @@ public class CorResource {
     @DELETE
     @Transactional
     @Path("/{id}")
+    @RolesAllowed({"Administrador"})
     public Response delete(@PathParam("id") Long id) {
         service.delete(id);
         return Response.status(Status.NO_CONTENT).build();

@@ -1,4 +1,5 @@
 package br.unitins.projeto.resource.produto;
+import jakarta.annotation.security.RolesAllowed;
 import org.jboss.logging.Logger;
 
 import br.unitins.projeto.dto.produto.sabor.SaborDTO;
@@ -31,6 +32,7 @@ public class SaborResource {
     private static final Logger LOG = Logger.getLogger(SaborResource.class);
 
     @POST
+    @RolesAllowed({"Administrador"})
     public Response create(SaborDTO dto) {
         SaborResponseDTO retorno = service.create(dto);
         //return Response.status(Status.CREATED).entity(retorno).build();
@@ -40,6 +42,7 @@ public class SaborResource {
     @PUT
     @Transactional
     @Path("/{id}")
+    @RolesAllowed({"Administrador"})
     public Response update(SaborDTO dto, @PathParam("id") Long id) {
         service.update(id, dto);
         return Response.status(Status.NO_CONTENT).build();
@@ -48,6 +51,7 @@ public class SaborResource {
     @DELETE
     @Transactional
     @Path("/{id}")
+    @RolesAllowed({"Administrador"})
     public Response delete(@PathParam("id") Long id) {
         service.delete(id);
         return Response.status(Status.NO_CONTENT).build();
