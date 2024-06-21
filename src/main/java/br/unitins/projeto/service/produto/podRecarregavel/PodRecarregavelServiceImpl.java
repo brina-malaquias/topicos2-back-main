@@ -1,15 +1,19 @@
 package br.unitins.projeto.service.produto.podRecarregavel;
 
+import java.io.IOException;
+import java.io.NotActiveException;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 import br.unitins.projeto.dto.produto.podRecarregavel.PodRecarregavelDTO;
 import br.unitins.projeto.dto.produto.podRecarregavel.PodRecarregavelResponseDTO;
+import br.unitins.projeto.form.PodRecarregavelImageForm;
 import br.unitins.projeto.model.produto.PodRecarregavel;
 import br.unitins.projeto.repository.produto.CorRepository;
 import br.unitins.projeto.repository.produto.MarcaRepository;
 import br.unitins.projeto.repository.produto.PodRecarregavelRepository;
+import br.unitins.projeto.service.file.FileService;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
@@ -33,6 +37,9 @@ public class PodRecarregavelServiceImpl implements PodRecarregavelService{
 
     @Inject
     Validator validator;
+
+    @Inject
+    FileService fileService;
     
     @Override
     public List<PodRecarregavelResponseDTO> getAll(int page, int pageSize) {
@@ -110,4 +117,26 @@ public class PodRecarregavelServiceImpl implements PodRecarregavelService{
     public long count() {
         return podRecarregavelRepository.count();
     }
+
+    
+    @Override
+    @Transactional
+    public void salvarImagens(PodRecarregavelImageForm imagem) throws IOException {
+        PodRecarregavel podRecarregavel = podRecarregavelRepository.findById(imagem.getId());
+
+        if (podRecarregavel == null) {
+            throw new NotActiveException("PodRecarregavel não encontrado");
+        }
+
+        try {
+            String novoNomeImagem = fileService.salvarImagem(imagem.getImagem(), imagem.getNomeImagem(), "podRecarregavel");
+            String imagemAntiga = podRecarregavel.getNomeImagem();
+            podRecarregavel.setNomeImagem(novoNomeImagem);
+
+            fileService.excluirImagem(imagemAntiga, "podRecarregavel");
+        } catch (IOException e) {
+            throw e;
+        }
+    }
+    
 }

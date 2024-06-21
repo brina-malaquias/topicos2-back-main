@@ -1,16 +1,20 @@
 package br.unitins.projeto.service.produto.coil;
 
 
+import java.io.IOException;
+import java.io.NotActiveException;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 import br.unitins.projeto.dto.produto.coil.CoilDTO;
 import br.unitins.projeto.dto.produto.coil.CoilResponseDTO;
+import br.unitins.projeto.form.CoilImageForm;
 import br.unitins.projeto.model.produto.Coil;
 import br.unitins.projeto.repository.produto.CoilRepository;
 import br.unitins.projeto.repository.produto.MarcaRepository;
 import br.unitins.projeto.repository.produto.ResistenciaRepository;
+import br.unitins.projeto.service.file.FileService;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
@@ -33,6 +37,9 @@ public class CoilServiceImpl implements CoilService{
 
     @Inject
     Validator validator;
+
+    @Inject
+    FileService fileService;
     
     @Override
     public List<CoilResponseDTO> getAll(int page, int pageSize) {
@@ -110,4 +117,26 @@ public class CoilServiceImpl implements CoilService{
     public long count() {
         return coilRepository.count();
     }
+
+    
+    @Override
+    @Transactional
+    public void salvarImagens(CoilImageForm imagem) throws IOException {
+        Coil coil = coilRepository.findById(imagem.getId());
+
+        if (coil == null) {
+            throw new NotActiveException("Coil não encontrado");
+        }
+
+        try {
+            String novoNomeImagem = fileService.salvarImagem(imagem.getImagem(), imagem.getNomeImagem(), "coil");
+            String imagemAntiga = coil.getNomeImagem();
+            coil.setNomeImagem(novoNomeImagem);
+
+            fileService.excluirImagem(imagemAntiga, "coil");
+        } catch (IOException e) {
+            throw e;
+        }
+    }
+    
 }

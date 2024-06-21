@@ -56,7 +56,7 @@ public class ProdutoServiceImpl implements ProdutoService {
         return new ProdutoResponseDTO(produto);
     }
 
-    /*@Override
+    @Override
     @Transactional
     public ProdutoResponseDTO create(@Valid ProdutoDTO produtoDTO) throws ConstraintViolationException {
 
@@ -69,35 +69,7 @@ public class ProdutoServiceImpl implements ProdutoService {
         repository.persist(entity);
         return new ProdutoResponseDTO(entity);
     }
-*/
 
-//ou
-/*
-    @Override
-    @Transactional
-    public ProdutoResponseDTO create(@Valid ProdutoDTO produtoDTO) throws ConstraintViolationException {
-
-        Produto entity;
-        
-        if (produtoDTO.tipo().equals("PodRecarregavel")) {
-            entity = new PodRecarregavel();
-        } else if (produtoDTO.tipo().equals("PodDescartavel")) {
-            entity = new PodDescartavel();
-        } else if (produtoDTO.tipo().equals("NicSalt")) {
-            entity = new NicSalt();
-        } else if (produtoDTO.tipo().equals("Coil")) {
-            entity = new Coil();
-        } else {
-            throw new IllegalArgumentException("Tipo de produto desconhecido: " + produtoDTO.tipo());
-        }
-
-        entity.setNome(produtoDTO.nome());
-        entity.setDescricao(produtoDTO.descricao());
-        entity.setValor(produtoDTO.valor());
-        repository.persist(entity);
-        return new ProdutoResponseDTO(entity);
-    }
-*/
 
     @Override
     @Transactional
@@ -185,103 +157,4 @@ public class ProdutoServiceImpl implements ProdutoService {
             throw e;
         }
     }
-
-    /*
-
-    @Override
-    public byte[] criarRelatorioProduto() {
-
-        List<Produto> lista = repository.findAll().list();
-        return gerarRelatorioPDF(lista);
-    }
-
-    private byte[] gerarRelatorioPDF(List<Produto> produtos){
-
-         // Crie um ByteArrayOutputStream para armazenar o PDF resultante
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-
-        // Crie um documento PDF usando o iText7
-        try (PdfDocument pdfDocument = new PdfDocument(new PdfWriter(baos))) {
-            
-            Document document = new Document(pdfDocument, PageSize.A4);
-            pdfDocument.addEventHandler(PdfDocumentEvent.END_PAGE, new HeaderFooterHandler());
-
-            // Adicione um cabeçalho ao PDF
-            // Image logo = new Image(ImageDataFactory.create("caminho/para/sua/logo.png"));
-            // document.add(logo);
-
-
-            // Adicione um título e um subtítulo
-            Paragraph titulo = new Paragraph("Relatório de Produtos")
-                    .setTextAlignment(TextAlignment.CENTER)
-                    .setFontSize(22);
-                
-            String dataHora = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy hh:mm"));
-            Paragraph subtitulo = new Paragraph("Gerado em: " + dataHora)
-                    .setTextAlignment(TextAlignment.CENTER)
-                    .setFontSize(12);
-            document.add(titulo);
-            document.add(subtitulo);
-
-            // Adicione a tabela com os itens
-            Table tabela = new Table(new float[]{1, 1, 1, 1, 1})
-                    .setWidth(UnitValue.createPercentValue(100))
-                    .setMarginTop(10);
-            tabela.addHeaderCell("ID");
-            tabela.addHeaderCell("Nome");
-            tabela.addHeaderCell("Preço");
-            tabela.addHeaderCell("Vendas");
-            tabela.addHeaderCell("Total");
-
-
-
-            for (Produto produto : produtos) {
-                int vendas = 0;
-                
-                if (itemCompraRepository.findByProduto(produto.getId()).size() == 0) {
-                    vendas = 0;
-                }
-                else{
-                    vendas =  itemCompraRepository.findByProduto(produto.getId()).size() ;
-                }
-                
-                double lucro = vendas * produto.getPreco();
-                
-                tabela.addCell(String.valueOf(produto.getId()));
-                tabela.addCell(produto.getNome());
-                tabela.addCell(String.valueOf(produto.getPreco()));
-                tabela.addCell(String.valueOf(vendas));
-                tabela.addCell(String.valueOf(lucro)+ " reais");
-            }
-
-            document.add(tabela);
-
-            document.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return baos.toByteArray();
-    }
-
-    class HeaderFooterHandler implements IEventHandler {
-        public void handleEvent(Event event) {
-            PdfDocumentEvent docEvent = (PdfDocumentEvent) event;
-            PdfDocument pdf = docEvent.getDocument();
-            PdfPage page = docEvent.getPage();
-            int pageNum = pdf.getPageNumber(page);
-
-            PdfCanvas canvas = new PdfCanvas(page.newContentStreamBefore(), page.getResources(), pdf);
-            canvas.beginText().setFontAndSize(pdf.getDefaultFont(), 12);
-            
-            canvas.moveText(34, 20).showText("Página "+ pageNum);
-
-            String dataHora = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy - hh:mm:ss"));
-            canvas.moveText(500 - 80, 0).showText(dataHora);
-
-            canvas.endText();
-                  
-        }
-    }
-    */
 }

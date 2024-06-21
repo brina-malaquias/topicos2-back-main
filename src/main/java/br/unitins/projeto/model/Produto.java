@@ -8,7 +8,7 @@ import jakarta.persistence.InheritanceType;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-public abstract class Produto extends DefaultEntity {
+public class Produto extends DefaultEntity {
 
     @Column(nullable = false, length = 50)
     private String nome;

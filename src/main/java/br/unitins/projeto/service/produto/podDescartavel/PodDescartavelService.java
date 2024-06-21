@@ -1,10 +1,12 @@
 package br.unitins.projeto.service.produto.podDescartavel;
 
 
+import java.io.IOException;
 import java.util.List;
 
 import br.unitins.projeto.dto.produto.podDescartavel.PodDescartavelDTO;
 import br.unitins.projeto.dto.produto.podDescartavel.PodDescartavelResponseDTO;
+import br.unitins.projeto.form.PodDescartavelImageForm;
 import jakarta.validation.Valid;
 
 public interface PodDescartavelService {
@@ -25,4 +27,7 @@ public interface PodDescartavelService {
         List<PodDescartavelResponseDTO> findByNome(String nome);
     
         long count();
+
+        void salvarImagens(PodDescartavelImageForm imagens) throws IOException;
+
 }

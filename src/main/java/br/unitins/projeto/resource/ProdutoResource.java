@@ -13,6 +13,7 @@ import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.PATCH;
+import jakarta.ws.rs.POST;
 import jakarta.ws.rs.PUT;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
@@ -22,7 +23,6 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.Response.Status;
 import org.jboss.logging.Logger;
-//import org.jboss.resteasy.annotations.providers.multipart.MultipartForm;
 import org.jboss.resteasy.annotations.providers.multipart.MultipartForm;
 
 import java.io.IOException;
@@ -54,7 +54,6 @@ public class ProdutoResource {
         return service.findById(id);
     }
 
-/*
     @POST
     @RolesAllowed({"Administrador"})
     public Response insert(ProdutoDTO dto) {
@@ -76,7 +75,7 @@ public class ProdutoResource {
 
         return Response.status(Status.NOT_FOUND).entity(result).build();
     }
- */
+
     @PUT
     @Path("/{id}")
     @RolesAllowed({"Administrador"})
@@ -218,18 +217,5 @@ public class ProdutoResource {
         }
     }
 
-    /* 
-    @GET
-    @Path("/relatorio")
-    @RolesAllowed({"Administrador"})
-    @Produces("application/pdf")
-    public Response gerarRelatorioPDF() {
-        byte[] pdf = service.criarRelatorioProduto();
-        ResponseBuilder response = Response.ok(pdf);
-        response.header("Content-Disposition", "attachment;filename=relatorioProdutosPetIsco.pdf");
-        return response.build();
-
-    }
-*/
 }
 

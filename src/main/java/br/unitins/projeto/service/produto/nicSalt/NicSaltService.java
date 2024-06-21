@@ -1,10 +1,12 @@
 package br.unitins.projeto.service.produto.nicSalt;
 
 
+import java.io.IOException;
 import java.util.List;
 
 import br.unitins.projeto.dto.produto.nicSalt.NicSaltDTO;
 import br.unitins.projeto.dto.produto.nicSalt.NicSaltResponseDTO;
+import br.unitins.projeto.form.NicSaltImageForm;
 import jakarta.validation.Valid;
 
 public interface NicSaltService {
@@ -25,4 +27,8 @@ public interface NicSaltService {
         List<NicSaltResponseDTO> findByNome(String nome);
     
         long count();
+
+        void salvarImagens(NicSaltImageForm imagens) throws IOException;
+
+
 }

@@ -14,7 +14,7 @@ public interface ProdutoService {
 
     ProdutoResponseDTO findById(Long id);
 
-    //ProdutoResponseDTO create(@Valid ProdutoDTO produtoDTO);
+    ProdutoResponseDTO create(@Valid ProdutoDTO produtoDTO);
 
     ProdutoResponseDTO update(Long id, @Valid ProdutoDTO produtoDTO);
 
@@ -31,7 +31,5 @@ public interface ProdutoService {
     Long count();
 
     void salvarImagens(ProdutoImageForm imagens) throws IOException;
-
-    //byte[] criarRelatorioProduto();
 
 }

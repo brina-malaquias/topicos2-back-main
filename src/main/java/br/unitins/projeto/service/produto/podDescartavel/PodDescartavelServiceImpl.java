@@ -1,16 +1,22 @@
 package br.unitins.projeto.service.produto.podDescartavel;
 
+import java.io.IOException;
+import java.io.NotActiveException;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 import br.unitins.projeto.dto.produto.podDescartavel.PodDescartavelDTO;
 import br.unitins.projeto.dto.produto.podDescartavel.PodDescartavelResponseDTO;
+import br.unitins.projeto.form.CoilImageForm;
+import br.unitins.projeto.form.PodDescartavelImageForm;
+import br.unitins.projeto.model.produto.Coil;
 import br.unitins.projeto.model.produto.PodDescartavel;
 import br.unitins.projeto.repository.produto.MarcaRepository;
 import br.unitins.projeto.repository.produto.PodDescartavelRepository;
 import br.unitins.projeto.repository.produto.PuffRepository;
 import br.unitins.projeto.repository.produto.SaborRepository;
+import br.unitins.projeto.service.file.FileService;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
@@ -37,6 +43,9 @@ public class PodDescartavelServiceImpl implements PodDescartavelService{
 
     @Inject
     Validator validator;
+
+    @Inject
+    FileService fileService;
     
     @Override
     public List<PodDescartavelResponseDTO> getAll(int page, int pageSize) {
@@ -118,4 +127,25 @@ public class PodDescartavelServiceImpl implements PodDescartavelService{
     public long count() {
         return podDescartavelRepository.count();
     }
+
+    @Override
+    @Transactional
+    public void salvarImagens(PodDescartavelImageForm imagem) throws IOException {
+        PodDescartavel podDescartavel = podDescartavelRepository.findById(imagem.getId());
+
+        if (podDescartavel == null) {
+            throw new NotActiveException("PodDescartavel não encontrado");
+        }
+
+        try {
+            String novoNomeImagem = fileService.salvarImagem(imagem.getImagem(), imagem.getNomeImagem(), "podDescartavel");
+            String imagemAntiga = podDescartavel.getNomeImagem();
+            podDescartavel.setNomeImagem(novoNomeImagem);
+
+            fileService.excluirImagem(imagemAntiga, "podDescartavel");
+        } catch (IOException e) {
+            throw e;
+        }
+    }
+
 }
