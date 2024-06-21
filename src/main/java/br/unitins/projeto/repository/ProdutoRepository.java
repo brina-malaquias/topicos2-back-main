@@ -16,6 +16,7 @@ public class ProdutoRepository implements PanacheRepository<Produto> {
         return find("UPPER(nome) LIKE ?1 ", "%" + nome.toUpperCase() + "%").list();
     }
 
+    
     public PanacheQuery<Produto> findByFiltro(String nome, Boolean ativo) {
         if (nome != null && ativo != null) {
             return find("UPPER(nome) LIKE ?1 AND ativo = ?2 ", "%" + nome.toUpperCase() + "%", ativo);
@@ -31,5 +32,6 @@ public class ProdutoRepository implements PanacheRepository<Produto> {
 
         return null;
     }
+
 
 }
