@@ -9,8 +9,6 @@ import jakarta.persistence.*;
 @Entity
 @PrimaryKeyJoinColumn(name = "id")
 public class Coil extends Produto{
-    
-    private String nomeImagem;
 
     @ManyToMany
     @JoinTable(name = "coil_resistencia", 
@@ -23,14 +21,6 @@ public class Coil extends Produto{
                 joinColumns = @JoinColumn(name = "id_coil"), 
                 inverseJoinColumns = @JoinColumn(name = "id_marca"))
     private List<Marca> listaMarca;
-
-    public String getNomeImagem() {
-        return nomeImagem;
-    }
-
-    public void setNomeImagem(String nomeImagem) {
-        this.nomeImagem = nomeImagem;
-    }
 
     public List<Resistencia> getListaResistencia() {
         return listaResistencia;

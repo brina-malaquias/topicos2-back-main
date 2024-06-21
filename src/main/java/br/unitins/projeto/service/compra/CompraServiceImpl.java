@@ -118,16 +118,6 @@ public class CompraServiceImpl implements CompraService {
             ItemCompra itemModel = itemCompraService.toModel(itemDTO);
             itemModel.setCompra(entity);
 
-            Produto produto = itemModel.getProduto();
-            int quantidadeComprada = itemModel.getQuantidade();
-
-            if (produto.getEstoque() >= quantidadeComprada) {
-                produto.setEstoque(produto.getEstoque() - quantidadeComprada);
-                produtoRepository.persist(produto);
-            } else {
-                throw new RuntimeException("Estoque insuficiente para o produto: " + produto.getNome());
-            }
-
             itens.add(itemModel);
             preco.updateAndGet(v -> v + (itemModel.getValor() * itemModel.getQuantidade()));
         });

@@ -8,40 +8,31 @@ import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.PrimaryKeyJoinColumn;
 
 @Entity
 @PrimaryKeyJoinColumn(name = "id")
-public class PodDescartavel extends Produto{
-    
-    private String nomeImagem;
+public class PodDescartavel extends Produto {
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @ManyToMany
     @JoinTable(name = "podDescartavel_sabor", 
                 joinColumns = @JoinColumn(name = "id_podDescartavel"), 
                 inverseJoinColumns = @JoinColumn(name = "id_sabor"))
     private List<Sabor> listaSabor;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @ManyToMany
     @JoinTable(name = "podDescartavel_puff", 
                 joinColumns = @JoinColumn(name = "id_podDescartavel"), 
                 inverseJoinColumns = @JoinColumn(name = "id_puff"))
     private List<Puff> listaPuff;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @ManyToMany
     @JoinTable(name = "podDescartavel_marca", 
                 joinColumns = @JoinColumn(name = "id_podDescartavel"), 
                 inverseJoinColumns = @JoinColumn(name = "id_marca"))
     private List<Marca> listaMarca;
-
-    public String getNomeImagem() {
-        return nomeImagem;
-    }
-
-    public void setNomeImagem(String nomeImagem) {
-        this.nomeImagem = nomeImagem;
-    }
 
     public List<Sabor> getListaSabor() {
         return listaSabor;

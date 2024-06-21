@@ -1,45 +1,26 @@
+insert into estado (nome, sigla) values( 'Tocantins', 'TO');
+insert into estado (nome, sigla) values( 'Goiás', 'GO');
+insert into estado (nome, sigla) values( 'São Paulo', 'SP');
+insert into estado (nome, sigla) values( 'Rio de Janeiro', 'RJ');
+insert into estado (nome, sigla) values( 'Pará', 'PA');
 
-INSERT INTO pessoa(nome) VALUES ('Maria');
-INSERT INTO pessoafisica(id, cpf, email, data_nascimento) VALUES (1, '47652930090', 'maria@gmail', '2002-10-10');
-INSERT INTO usuario(login, senha, id_pessoa_fisica, ativo) VALUES ('maria', 'TRwn0XU29Gwl2sagG00bvjrNJvLuYo+dbOBJ7R3xFpU4m/FAUc5q8OoGbVNwPF7F5713RaYkN4qyufNCDHm/mA==', 1, true);
+insert into cidade (nome, id_estado) values( 'Palmas', 1);
+insert into cidade (nome, id_estado) values( 'Paraíso', 1);
+insert into cidade (nome, id_estado) values( 'Gurupi', 1);
+insert into cidade (nome, id_estado) values( 'Goiânia', 2);
+insert into cidade (nome, id_estado) values( 'Anápolis', 2);
 
-INSERT INTO  perfis (id_usuario, perfil) VALUES (1, 1);
-INSERT INTO  perfis (id_usuario, perfil) VALUES (1, 3);
+insert into sabor (sabor) values ('mint');
+insert into sabor (sabor) values ('kiwi');
 
-INSERT INTO pessoa(nome) VALUES ('João');
-INSERT INTO pessoafisica(id, cpf, email, data_nascimento) VALUES (2, '05319824165', 'joaao@gmail', '2002-10-05');
-INSERT INTO usuario(login, senha, id_pessoa_fisica, ativo) VALUES ('joao', 'TRwn0XU29Gwl2sagG00bvjrNJvLuYo+dbOBJ7R3xFpU4m/FAUc5q8OoGbVNwPF7F5713RaYkN4qyufNCDHm/mA==', 2, true);
+insert into cor (cor) values ('blue-royal');
+insert into cor (cor) values ('black');
 
-INSERT INTO perfis (id_usuario, perfil) VALUES (2, 2);
-INSERT INTO perfis (id_usuario, perfil) VALUES (2, 1);
+insert into puff (quantidade) values ('7000');
+insert into puff (quantidade) values ('2500');
 
-insert into metododerecebimento(id) values (default);
-insert into metododerecebimento(id) values (default);
-insert into metododerecebimento(id) values (default);
-insert into metododerecebimento(id) values (default);
-insert into metododerecebimento(id) values (default);
-insert into metododerecebimento(id) values (default);
-insert into metododerecebimento(id) values (default);
-insert into metododerecebimento(id) values (default);
+insert into marca (nome, descricao) values ('ignite', 'a melhor do mercado');
+insert into marca (nome, descricao) values ('elfbar', 'a mais antiga do mercado');
 
-insert into pixrecebimento(id, chave, tipo_chave, ativo) values (1, '63984883349', 4, true);
-insert into pixrecebimento(id, chave, tipo_chave, ativo) values (2, 'petisco@gmail.com', 3, false);
-insert into pixrecebimento(id, chave, tipo_chave, ativo) values (3, '000000213233', 2, false);
-insert into pixrecebimento(id, chave, tipo_chave, ativo) values (4, 'petiscopetisco', 1, false);
-
-insert into boletorecebimento(id, banco, nome, cnpj, agencia, conta, ativo) values (5, '123', 'MalakaPods S/A', '111233232231', '12345', '1234', true);
-insert into boletorecebimento(id, banco, nome, cnpj, agencia, conta, ativo) values (6, '123', 'MalakaPods LTDA', '111233232231', '12345', '1234', false);
-
-
-INSERT INTO Estado (dataInclusao, dataAlteracao, sigla, nome)
-VALUES ('2023-12-07 08:35:00', '2023-12-07 08:40:00', 'TO', 'Tocantins');
-
-INSERT INTO Municipio (dataInclusao, dataAlteracao, nome, id_estado)
-VALUES ('2023-12-07 08:45:00', '2023-12-07 08:50:00', 'Palmas', 1);
-
-
-INSERT INTO Telefone (dataInclusao, dataAlteracao, codigoArea, numero)
-VALUES ('2023-12-07 09:10:00', '2023-12-07 09:15:00', '63', '912345678');
-
-INSERT INTO usuario_telefone (id_telefone, id_usuario) VALUES (1,1);
-
+insert into resistencia (ohms) values ('2.1');
+insert into resistencia (ohms) values ('1.2');

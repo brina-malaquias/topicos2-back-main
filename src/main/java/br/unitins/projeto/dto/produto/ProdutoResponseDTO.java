@@ -16,7 +16,6 @@ public record ProdutoResponseDTO(
         entity.getNome(),
         entity.getDescricao(),
         entity.getValor(),
-
         entity.getNomeImagem());
     }
 }
